@@ -11,14 +11,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cc.feedback.dao.EmployeeDao;
 import cc.feedback.entities.EmployeeEntity;
+import cc.feedback.entities.PendingFeedbackEntity;
 
 @Repository
 @Transactional
+@SuppressWarnings("unchecked")
 public class EmployeeDaoImpl implements EmployeeDao {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-
 
 	@Override
 	public void save(EmployeeEntity employee) {
@@ -27,12 +28,22 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public List<EmployeeEntity> getAll() {
-		String hql = "Select E FROM EmployeeEntity E";
-		Query query = entityManager.createQuery(hql);
-		@SuppressWarnings("unchecked")
+	public EmployeeEntity getEmployeeById(Long id) {
+		return entityManager.find(EmployeeEntity.class, id);
+	}
+
+	@Override
+	public EmployeeEntity getEmployeeByUsername(String userName) {
+		Query query = entityManager.createQuery("Select E FROM EmployeeEntity E WHERE E.userName =:userName");
+		query.setParameter("userName", userName);
 		List<EmployeeEntity> results = query.getResultList();
-		return results;
+		return results.isEmpty() ? null : results.get(0);
+	}
+
+	@Override
+	public List<PendingFeedbackEntity> getAllPendingReviews(Long id) {
+		EmployeeEntity employee = getEmployeeById(id);
+		return employee.getPendingFeedbacks();
 	}
 
 }
