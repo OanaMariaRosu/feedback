@@ -1,0 +1,18 @@
+1. Sa moara capra vecinului ce smechera e aplicatia asta!!!
+
+2. Feedback intern pentru angajatii unei firme. (Eventual extensie la Atlassian Tools !! (idee de prezentat, nu de implementat :D))
+Angajatii vor fi organizati pe echipe. Fiecare membru al echipei va trebui sa dea feedback colegilor sai, la review. Un review incorporeaza mai multe categorii care vor fi punctate de colegi (communication skills, technical skills etc. (a se completa mai departe)).
+
+Structura baza de date:
+EMPLOYEE (ID, TEAM_ID, NAME, SURNAME, DATE_OF_EMPLOYMENT, NEXT_REVIEW, POSITION(DEFAULT=69)(DEFAULT2=BO$$))
+TEAM (ID, PROJECT_NAME, TEAM_LEAD_ID)
+FEEDBACK(ID, CATEGORY, MESSAGE, SCORE)
+RATING(ID, FEEDBACK_ID, GIVEN_BY, GIVEN_TO, GIVEN_AT(DATE))
+
+3. Cu o scurta perioada de timp inainte de data trecuta in EMPLOYEE_NEXT_REVIEW toata echipa angajatului va primi un mail de notificare pentru a completa o pagina de review pentru cel inculpat (un tip de mesaj pentru cel care va primi review, sa se pregateasca psihic - si unul pentru colegii sai pentru a incepe sa completeze).
+
+4. Putem face cateva grafice in functie de un review primit(care are mai multe categorii fiecare cu propriul scor), sau/si toate reviewrile primite de un angajat. 
+
+5. Pentru inceput un review nu poate fi vazut decat de persoana care l-a primit(ne putem gandi la ceva drepturi de access dar zic sa nu ne complicam).
+
+6. To be continued...
