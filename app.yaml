@@ -16,4 +16,3 @@ health_check:
   
 resources:
   memory_gb: 2.0
-  
