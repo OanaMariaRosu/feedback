@@ -1,5 +1,8 @@
 package cc.feedback.dao.impl;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -44,6 +47,19 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public List<PendingFeedbackEntity> getAllPendingReviews(Long id) {
 		EmployeeEntity employee = getEmployeeById(id);
 		return employee.getPendingFeedbacks();
+	}
+
+	@Override
+	public List<EmployeeEntity> getEmployeesThatHaveReviewsSoon() {
+		Calendar now = Calendar.getInstance();
+		return null;
+//		Instant d1i = Instant.ofEpochMilli(now.getTimeInMillis());
+//	    Instant d2i = Instant.ofEpochMilli(d2.getTimeInMillis());
+//
+//	    LocalDateTime startDate = LocalDateTime.ofInstant(d1i, ZoneId.systemDefault());
+//	    LocalDateTime endDate = LocalDateTime.ofInstant(d2i, ZoneId.systemDefault());
+//
+//	    return ChronoUnit.WEEKS.between(startDate, endDate);
 	}
 
 }
