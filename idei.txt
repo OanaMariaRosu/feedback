@@ -15,4 +15,6 @@ RATING(ID, FEEDBACK_ID, GIVEN_BY, GIVEN_TO, GIVEN_AT(DATE))
 
 5. Pentru inceput un review nu poate fi vazut decat de persoana care l-a primit(ne putem gandi la ceva drepturi de access dar zic sa nu ne complicam).
 
-6. To be continued...
+6. Posibilitate de improvement: clientii sa poata da feedback echipei cu care lucreaza.
+
+7. To be continued...
