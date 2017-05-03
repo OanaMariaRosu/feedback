@@ -3,6 +3,8 @@ package cc.feedback.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -15,7 +17,9 @@ public class RatingEntity {
 	@GeneratedValue
 	private Long id;
 
-	private String category;
+	@JoinColumn(name = "CATEGORY_ID")
+	@OneToOne
+	private CategoryEntity category;
 
 	private String message;
 
@@ -29,11 +33,11 @@ public class RatingEntity {
 		this.id = id;
 	}
 
-	public String getCategory() {
+	public CategoryEntity getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(CategoryEntity category) {
 		this.category = category;
 	}
 

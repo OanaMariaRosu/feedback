@@ -11,7 +11,6 @@ import cc.feedback.entities.FeedbackEntity;
 
 @Repository
 @Transactional
-@SuppressWarnings("unchecked")
 public class FeedbackDaoImpl implements FeedbackDao {
 
 	@PersistenceContext

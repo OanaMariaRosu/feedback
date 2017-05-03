@@ -34,7 +34,7 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/employee/{id}/team", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<EmployeeEntity> save(@RequestParam Long id) {
+	public List<EmployeeEntity> getAllTeamMembers(@RequestParam Long id) {
 		TeamEntity team = teamDao.getTeamById(id);
 		List<EmployeeEntity> teamMembers = new ArrayList<>();
 		teamMembers.add(team.getTeamLeader());
