@@ -36,7 +36,7 @@ public class FeedbackController {
 
 	}
 	
-	@RequestMapping(value="/feedback", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/category", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<CategoryEntity> getAllCategories() {
 		return categoryDao.getAllCategories();
 	}

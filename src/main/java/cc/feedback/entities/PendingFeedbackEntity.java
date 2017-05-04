@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -14,8 +15,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
-@Table(name = "PENDING_FEEDBACK")
+@Table(name = "PENDING_FEEDBACK", schema = "sql11172759")
 @XmlRootElement(name = "pendingFeedback")
 public class PendingFeedbackEntity {
 
@@ -25,10 +28,12 @@ public class PendingFeedbackEntity {
 
 	@JoinColumn(name = "FEEDBACK_FOR")
 	@OneToOne
+	@JsonBackReference
 	private EmployeeEntity feedbackFor;
 
 	@JoinColumn(name = "FEEDBACK_FROM")
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonBackReference
 	private EmployeeEntity feedbackFrom;
 
 	@Column(name = "DUE_DATE")

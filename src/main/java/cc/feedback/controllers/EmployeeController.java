@@ -36,14 +36,11 @@ public class EmployeeController {
 	@RequestMapping(value = "/team", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<EmployeeEntity> getAllTeamMembers(@RequestParam(value="id") Long id) {
 		TeamEntity team = teamDao.getTeamById(id);
-		List<EmployeeEntity> teamMembers = new ArrayList<>();
-		// teamMembers.add(team.getTeamLeader());
-		teamMembers.addAll(team.getTeamMembers());
-		return teamMembers;
+		return team.getTeamMembers();
 	}
 
-	@RequestMapping(value = "/employee/{id}/pendingReviews", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<PendingFeedbackEntity> getAllPendingReviews(@RequestParam Long id) {
+	@RequestMapping(value = "/employee/pendingReviews", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<PendingFeedbackEntity> getAllPendingReviews(@RequestParam(value="id") Long id) {
 		return employeeDao.getAllPendingReviews(id);
 	}
 

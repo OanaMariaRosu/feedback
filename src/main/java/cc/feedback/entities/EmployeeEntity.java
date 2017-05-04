@@ -3,9 +3,9 @@ package cc.feedback.entities;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -17,8 +17,11 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
-@Table(name = "EMPLOYEE")
+@Table(name = "EMPLOYEE", schema = "sql11172759")
 @XmlRootElement(name = "employee")
 public class EmployeeEntity {
 
@@ -37,9 +40,10 @@ public class EmployeeEntity {
 	@XmlTransient
 	private String password;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEAM_ID")
-	private TeamEntity teamId;
+	@JsonBackReference
+	private TeamEntity team;
 
 	@Column(name = "DATE_OF_EMPLOYMENT")
 	@Temporal(TemporalType.DATE)
@@ -53,7 +57,11 @@ public class EmployeeEntity {
 	private String positionInCompany;
 
 	@OneToMany(mappedBy = "feedbackFrom")
+	@JsonManagedReference
 	private List<PendingFeedbackEntity> pendingFeedbacks;
+	
+	@Column(name = "IS_TEAM_LEADER")
+	private boolean isTeamLeader;
 
 	public Long getId() {
 		return id;
@@ -61,6 +69,14 @@ public class EmployeeEntity {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public boolean isTeamLeader() {
+		return isTeamLeader;
+	}
+
+	public void setTeamLeader(boolean isTeamLeader) {
+		this.isTeamLeader = isTeamLeader;
 	}
 
 	public String getName() {
@@ -77,14 +93,6 @@ public class EmployeeEntity {
 
 	public void setSurname(String surname) {
 		this.surname = surname;
-	}
-
-	public TeamEntity getTeamId() {
-		return teamId;
-	}
-
-	public void setTeamId(TeamEntity teamId) {
-		this.teamId = teamId;
 	}
 
 	public Date getDateOfEmployment() {
@@ -133,6 +141,14 @@ public class EmployeeEntity {
 
 	public void setPendingFeedbacks(List<PendingFeedbackEntity> pendingFeedbacks) {
 		this.pendingFeedbacks = pendingFeedbacks;
+	}
+
+	public TeamEntity getTeam() {
+		return team;
+	}
+
+	public void setTeam(TeamEntity team) {
+		this.team = team;
 	}
 
 }

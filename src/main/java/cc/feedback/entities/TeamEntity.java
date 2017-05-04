@@ -6,14 +6,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
-@Table(name = "TEAM")
+@Table(name = "TEAM", schema = "sql11172759")
 @XmlRootElement(name = "team")
 public class TeamEntity {
 
@@ -24,11 +24,8 @@ public class TeamEntity {
 	@Column(name="PROJECT_NAME")
 	private String projectName;
 
-	@JoinColumn(name="TEAM_LEADER_ID")
-	@OneToOne
-	private EmployeeEntity teamLeader;
-
-	@OneToMany(mappedBy="teamId")
+	@OneToMany(mappedBy="team")
+	@JsonManagedReference
 	private List<EmployeeEntity> teamMembers;
 
 	public Long getId() {
@@ -45,14 +42,6 @@ public class TeamEntity {
 
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
-	}
-
-	public EmployeeEntity getTeamLeader() {
-		return teamLeader;
-	}
-
-	public void setTeamLeader(EmployeeEntity teamLeader) {
-		this.teamLeader = teamLeader;
 	}
 
 	public List<EmployeeEntity> getTeamMembers() {

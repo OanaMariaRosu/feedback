@@ -15,8 +15,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
-@Table(name = "FEEDBACK")
+@Table(name = "FEEDBACK", schema = "sql11172759")
 @XmlRootElement(name = "feedback")
 public class FeedbackEntity {
 
@@ -25,6 +27,7 @@ public class FeedbackEntity {
 	private Long id;
 
 	@OneToMany(mappedBy="ratingFor")
+	@JsonManagedReference
 	private List<RatingEntity> ratings;
 
 	@JoinColumn(name = "GIVEN_BY")

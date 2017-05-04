@@ -1,6 +1,7 @@
 package cc.feedback.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -9,8 +10,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
-@Table(name = "RATING")
+@Table(name = "RATING", schema = "sql11172759")
 @XmlRootElement(name = "rating")
 public class RatingEntity {
 
@@ -23,7 +26,8 @@ public class RatingEntity {
 	private CategoryEntity category;
 	
 	@JoinColumn(name = "FEEDBACK_ID")
-	@ManyToOne
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.LAZY)
 	private FeedbackEntity ratingFor;
 
 	private String message;
