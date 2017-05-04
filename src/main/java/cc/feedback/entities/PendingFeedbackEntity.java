@@ -27,6 +27,7 @@ public class PendingFeedbackEntity {
 	@OneToOne
 	private EmployeeEntity feedbackFor;
 
+	@JoinColumn(name = "FEEDBACK_FROM")
 	@ManyToOne
 	private EmployeeEntity feedbackFrom;
 

@@ -24,7 +24,7 @@ public class FeedbackEntity {
 	@GeneratedValue
 	private Long id;
 
-	@OneToMany
+	@OneToMany(mappedBy="ratingFor")
 	private List<RatingEntity> ratings;
 
 	@JoinColumn(name = "GIVEN_BY")

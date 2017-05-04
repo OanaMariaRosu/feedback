@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -20,6 +21,10 @@ public class RatingEntity {
 	@JoinColumn(name = "CATEGORY_ID")
 	@OneToOne
 	private CategoryEntity category;
+	
+	@JoinColumn(name = "FEEDBACK_ID")
+	@ManyToOne
+	private FeedbackEntity ratingFor;
 
 	private String message;
 
@@ -39,6 +44,14 @@ public class RatingEntity {
 
 	public void setCategory(CategoryEntity category) {
 		this.category = category;
+	}
+
+	public FeedbackEntity getRatingFor() {
+		return ratingFor;
+	}
+
+	public void setRatingFor(FeedbackEntity ratingFor) {
+		this.ratingFor = ratingFor;
 	}
 
 	public String getMessage() {

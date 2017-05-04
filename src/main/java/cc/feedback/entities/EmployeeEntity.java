@@ -49,7 +49,7 @@ public class EmployeeEntity {
 	@Temporal(TemporalType.DATE)
 	private Date nextReviewDate;
 
-	@Column(name = "POSITION_IN_COMPANY")
+	@Column(name = "POSITION")
 	private String positionInCompany;
 
 	@OneToMany(mappedBy = "feedbackFrom")
