@@ -16,4 +16,6 @@ public interface EmployeeDao {
 
 	List<PendingFeedbackEntity> getAllPendingReviews(Long id);
 
+	List<EmployeeEntity> getEmployeesThatHaveReviewsSoon();
+
 }
