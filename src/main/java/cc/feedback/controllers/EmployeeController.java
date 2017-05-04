@@ -33,11 +33,11 @@ public class EmployeeController {
 		employeeDao.save(employee);
 	}
 
-	@RequestMapping(value = "/employee/{id}/team", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<EmployeeEntity> getAllTeamMembers(@RequestParam Long id) {
+	@RequestMapping(value = "/team", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<EmployeeEntity> getAllTeamMembers(@RequestParam(value="id") Long id) {
 		TeamEntity team = teamDao.getTeamById(id);
 		List<EmployeeEntity> teamMembers = new ArrayList<>();
-		teamMembers.add(team.getTeamLeader());
+		// teamMembers.add(team.getTeamLeader());
 		teamMembers.addAll(team.getTeamMembers());
 		return teamMembers;
 	}
