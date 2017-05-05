@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -32,7 +31,7 @@ public class PendingFeedbackEntity {
 	private EmployeeEntity feedbackFor;
 
 	@JoinColumn(name = "FEEDBACK_FROM")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JsonBackReference
 	private EmployeeEntity feedbackFrom;
 

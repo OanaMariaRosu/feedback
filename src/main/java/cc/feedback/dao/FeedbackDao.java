@@ -5,4 +5,6 @@ import cc.feedback.entities.FeedbackEntity;
 public interface FeedbackDao {
 
 	void save(FeedbackEntity feedbackEntity);
+	
+	FeedbackEntity getFeedback(Long id);
 }

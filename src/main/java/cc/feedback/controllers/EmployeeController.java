@@ -1,6 +1,5 @@
 package cc.feedback.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import cc.feedback.dao.EmployeeDao;
 import cc.feedback.dao.TeamDao;
 import cc.feedback.entities.EmployeeEntity;
-import cc.feedback.entities.PendingFeedbackEntity;
 import cc.feedback.entities.TeamEntity;
 
 @RestController
@@ -40,7 +38,8 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/employee/pendingReviews", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<PendingFeedbackEntity> getAllPendingReviews(@RequestParam(value="id") Long id) {
+	public List<EmployeeEntity> getAllPendingReviewsToDo(@RequestParam(value="id") Long id) {
+		// return all the employees for which he has to do review
 		return employeeDao.getAllPendingReviews(id);
 	}
 

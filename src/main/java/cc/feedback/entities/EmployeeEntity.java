@@ -56,7 +56,7 @@ public class EmployeeEntity {
 	@Column(name = "POSITION")
 	private String positionInCompany;
 
-	@OneToMany(mappedBy = "feedbackFrom")
+	@OneToMany(mappedBy = "feedbackFrom", fetch=FetchType.LAZY)
 	@JsonManagedReference
 	private List<PendingFeedbackEntity> pendingFeedbacks;
 	

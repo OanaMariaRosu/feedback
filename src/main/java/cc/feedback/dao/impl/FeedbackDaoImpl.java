@@ -22,4 +22,9 @@ public class FeedbackDaoImpl implements FeedbackDao {
 		entityManager.flush();
 	}
 
+	@Override
+	public FeedbackEntity getFeedback(Long id) {
+		return entityManager.find(FeedbackEntity.class, id);
+	}
+
 }

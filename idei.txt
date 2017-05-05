@@ -17,4 +17,192 @@ RATING(ID, FEEDBACK_ID, GIVEN_BY, GIVEN_TO, GIVEN_AT(DATE))
 
 6. Posibilitate de improvement: clientii sa poata da feedback echipei cu care lucreaza.
 
-7. To be continued...
+7. Exemplu de json pt FeedBackEntity:
+http://localhost:8080/feedback?id=1
+{
+  "id": 1,
+  "ratings": [
+    {
+      "id": 1,
+      "category": {
+        "id": 1,
+        "name": "Technical Expertise",
+        "description": "Know-how regarding the technology, the tools, the framework "
+      },
+      "message": "As expected",
+      "score": 2
+    },
+    {
+      "id": 2,
+      "category": {
+        "id": 2,
+        "name": "Analytical Thinking",
+        "description": "Assesment of problem solving skills: understanding requirements, thinking-up and \toptimizing ideas, implementing and testing the code"
+      },
+      "message": "As expected",
+      "score": 0
+    },
+    {
+      "id": 3,
+      "category": {
+        "id": 3,
+        "name": "Work Quality",
+        "description": "Compliance to quality standards (whether it is coding / testing standards compliance like clean code etc., or quality standards specific for the role)"
+      },
+      "message": "As expected",
+      "score": 2
+    },
+    {
+      "id": 4,
+      "category": {
+        "id": 4,
+        "name": "Autonomy",
+        "description": "Support required in delivering assigned tasks"
+      },
+      "message": "As expected",
+      "score": 1
+    },
+    {
+      "id": 5,
+      "category": {
+        "id": 5,
+        "name": "Learning and Adaptability",
+        "description": "The speed needed to assimilate new information, and adaption to changes"
+      },
+      "message": "As expected",
+      "score": 3
+    },
+    {
+      "id": 6,
+      "category": {
+        "id": 6,
+        "name": "Time Management",
+        "description": "The prioritization of work"
+      },
+      "message": "As expected",
+      "score": 1
+    },
+    {
+      "id": 7,
+      "category": {
+        "id": 7,
+        "name": "Communication Skills",
+        "description": "Argumentation of decision, presentation skills, ability to give feedback"
+      },
+      "message": "As expected",
+      "score": 0
+    },
+    {
+      "id": 8,
+      "category": {
+        "id": 8,
+        "name": "Team Work",
+        "description": "Helping someone, team orientation - support for team, cooperation, coaching"
+      },
+      "message": "As expected",
+      "score": 0
+    }
+  ],
+  "givenBy": {
+    "id": 1,
+    "name": "Burlacu",
+    "surname": "Dorin",
+    "userName": "dburlacu",
+    "password": "1234",
+    "dateOfEmployment": "2015-12-17",
+    "nextReviewDate": "2017-05-17",
+    "positionInCompany": "SSD1",
+    "pendingFeedbacks": [
+      {
+        "id": 1,
+        "dueDate": "2017-05-17"
+      }
+    ],
+    "teamLeader": true
+  },
+  "givenTo": {
+    "id": 3,
+    "name": "Mihalcea",
+    "surname": "Andreea",
+    "userName": "amihalcea",
+    "password": "3456",
+    "dateOfEmployment": "2016-01-22",
+    "nextReviewDate": "2018-01-22",
+    "positionInCompany": "SD1",
+    "pendingFeedbacks": [
+      {
+        "id": 3,
+        "dueDate": "2017-05-17"
+      }
+    ],
+    "teamLeader": false
+  },
+  "givenAt": "2016-01-13"
+}
+
+http://localhost:8080/category
+JSON pt toate categoriile:
+[
+  {
+    "id": 1,
+    "name": "Technical Expertise",
+    "description": "Know-how regarding the technology, the tools, the framework "
+  },
+  {
+    "id": 2,
+    "name": "Analytical Thinking",
+    "description": "Assesment of problem solving skills: understanding requirements, thinking-up and \toptimizing ideas, implementing and testing the code"
+  },
+  {
+    "id": 3,
+    "name": "Work Quality",
+    "description": "Compliance to quality standards (whether it is coding / testing standards compliance like clean code etc., or quality standards specific for the role)"
+  },
+  {
+    "id": 4,
+    "name": "Autonomy",
+    "description": "Support required in delivering assigned tasks"
+  },
+  {
+    "id": 5,
+    "name": "Learning and Adaptability",
+    "description": "The speed needed to assimilate new information, and adaption to changes"
+  },
+  {
+    "id": 6,
+    "name": "Time Management",
+    "description": "The prioritization of work"
+  },
+  {
+    "id": 7,
+    "name": "Communication Skills",
+    "description": "Argumentation of decision, presentation skills, ability to give feedback"
+  },
+  {
+    "id": 8,
+    "name": "Team Work",
+    "description": "Helping someone, team orientation - support for team, cooperation, coaching"
+  }
+]
+
+http://localhost:8080/employee/pendingReviews?id=1
+pt cine trebuie sa faca review persoana cu id=1
+[
+  {
+    "id": 1,
+    "name": "Burlacu",
+    "surname": "Dorin",
+    "userName": "dburlacu",
+    "password": "1234",
+    "dateOfEmployment": "2015-12-17",
+    "nextReviewDate": "2017-05-17",
+    "positionInCompany": "SSD1",
+    "pendingFeedbacks": [
+      {
+        "id": 1,
+        "dueDate": "2017-05-17"
+      }
+    ],
+    "teamLeader": true
+  }
+]

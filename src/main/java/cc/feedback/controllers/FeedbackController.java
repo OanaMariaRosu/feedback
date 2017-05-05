@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cc.feedback.dao.CategoryDao;
@@ -39,5 +40,11 @@ public class FeedbackController {
 	@RequestMapping(value="/category", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<CategoryEntity> getAllCategories() {
 		return categoryDao.getAllCategories();
+	}
+	
+	@RequestMapping(value="/feedback", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public FeedbackEntity getFeedback(@RequestParam(value="id") Long id) {
+		// get a feedback to see the returned json
+		return feedbackDao.getFeedback(id);
 	}
 }

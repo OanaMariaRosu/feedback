@@ -4,7 +4,6 @@ package cc.feedback.dao;
 import java.util.List;
 
 import cc.feedback.entities.EmployeeEntity;
-import cc.feedback.entities.PendingFeedbackEntity;
 
 public interface EmployeeDao {
 
@@ -14,7 +13,7 @@ public interface EmployeeDao {
 
 	EmployeeEntity getEmployeeById(Long id);
 
-	List<PendingFeedbackEntity> getAllPendingReviews(Long id);
+	List<EmployeeEntity> getAllPendingReviews(Long id);
 
 	List<EmployeeEntity> getEmployeesThatHaveReviewsSoon();
 

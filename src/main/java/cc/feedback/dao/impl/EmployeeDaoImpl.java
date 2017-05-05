@@ -1,7 +1,6 @@
 package cc.feedback.dao.impl;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -44,9 +43,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public List<PendingFeedbackEntity> getAllPendingReviews(Long id) {
+	public List<EmployeeEntity> getAllPendingReviews(Long id) {
 		EmployeeEntity employee = getEmployeeById(id);
-		return employee.getPendingFeedbacks();
+		List<PendingFeedbackEntity> pendingReviews = employee.getPendingFeedbacks();
+		
+		List<EmployeeEntity> employees = new ArrayList<>();
+		for (PendingFeedbackEntity entity:pendingReviews) {
+			employees.add(entity.getFeedbackFor());
+		}
+		return employees;
 	}
 
 	@Override
