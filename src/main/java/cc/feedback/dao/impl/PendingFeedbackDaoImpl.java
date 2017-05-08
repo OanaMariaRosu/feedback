@@ -23,10 +23,10 @@ public class PendingFeedbackDaoImpl implements PendingFeedbackDao {
 
 	@Override
 	public void resolveFeedback(EmployeeEntity from, EmployeeEntity to) {
-		String hql = "Select P from PendingFeedbackEntity P where P.givenTo =:feedbackTo AND P.feedbackFrom=:feedbackFrom";
+		String hql = "Select P from PendingFeedbackEntity P where P.feedbackFor =:feedbackTo AND P.feedbackFrom=:feedbackFrom";
 		Query query = entityManager.createQuery(hql);
-		query.setParameter("feedbackTo", to.getId());
-		query.setParameter("feedbackFrom", from.getId());
+		query.setParameter("feedbackTo", to);
+		query.setParameter("feedbackFrom", from);
 		List<PendingFeedbackEntity> results = query.getResultList();
 
 		if (!results.isEmpty()) {
