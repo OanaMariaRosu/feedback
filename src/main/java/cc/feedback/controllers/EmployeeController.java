@@ -24,7 +24,7 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeDao employeeDao;
-	
+
 	@Autowired
 	private FeedbackDao feedbackDao;
 
@@ -46,15 +46,23 @@ public class EmployeeController {
 	public List<EmployeeEntity> getAllPendingReviews(@RequestParam(value="username") String username) {
 		return employeeDao.getAllPendingReviews(username);
 	}
-	
+
 	@RequestMapping(value="/employee/receivedReviews", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<FeedbackEntity> getAllFeedbacksGivenToTheEmployee(@RequestParam(value="username") String username) {
 		return feedbackDao.getFeedbacksGivenToEmployee(username);
 	}
-	
+
 	@RequestMapping(value="/employee/givenReviews", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<FeedbackEntity> getAllFeedbacksGivenByTheEmployee(@RequestParam(value="username") String username) {
 		return feedbackDao.getFeedbacksGivenByEmployee(username);
 	}
-	
+
+	@RequestMapping(value="/employee/lastReview", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public FeedbackEntity getLastReviewOfEmployee(@RequestParam(value="username") String username) {
+		return feedbackDao.getLastFeedbackForEmployee(username);
+
+	}
+
+
+
 }
