@@ -1,5 +1,5 @@
 <div class="container pad-top">
-	<form>
+	<form name="form" class="form-signin" role="form">
 	<div>
 		<a ui-sref="viewCategory" class="btn-primary btn-lg nodecoration">View
 			Categories</a>
@@ -20,15 +20,15 @@
 				<td><b>{{category.name}}</b></td>
 				<td><input type="number" id="rating" min="1" max="5" value="1"
 					ng-model="feedbackDto.scores[$index]" class="form-control" 
-					ng-required="feedbackDto.comments[$index]" /></td>
+					ng-required="true" /></td>
 				<td><input type="text" id="argument"
 					ng-model="feedbackDto.comments[$index]" class="form-control"
-					ng-required="feedbackDto.scores[$index]" /></td>
+					ng-required="true" /></td>
 			</tr>
 		</tbody>
 	</table>
 
 <!-- TODO: verified submit -->
-	<a class="btn btn-danger" ng-click="submitFeedback()">Submit</a>
+	<button ng-disabled="form.$invalid" class="btn btn-danger" ng-click="submitFeedback()">Submit</a>
 	</form>
 </div>
