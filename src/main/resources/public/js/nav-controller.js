@@ -13,6 +13,10 @@ angular.module('navController', [])
 			{
 				name: 'Home',
 				url: '#/'
+			},
+			{
+				name: 'PendingFeedback',
+				url: '#/pendingFeedback'
 			}
 		]
 	});

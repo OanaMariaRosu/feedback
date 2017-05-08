@@ -52,7 +52,7 @@
 	        controller:'CategoriesListController'
 			})
 			.state('pendingFeedback',{
-	        url:'/pendingFeedback/:username',
+	        url:'/pendingFeedback',
 	        templateUrl: viewsPrefix + 'feedback.html',
 	        controller:'PendingFeedbackController'
 			})

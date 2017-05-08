@@ -1,10 +1,12 @@
 <div class="container pad-top">
+<!-- 	<div class="container" ng-if="!isCookieUndefined()"> -->
+<!-- 		<button class="btn-lg nodecoration pull-right" ng-click="logout()">Logout</button> -->
+<!-- 	</div> -->
+	
 	<form name="form" class="form-signin" role="form">
 	<div>
 		<a ui-sref="viewCategory" class="btn-primary btn-lg nodecoration">View
 			Categories</a>
-		<a ui-sref="pendingFeedback({username:currentUsername})" class="btn-primary btn-lg nodecoration">Return
-			to pending feedback</a>
 	</div>
 	<br> <br>
 	<table class="table categorytable">

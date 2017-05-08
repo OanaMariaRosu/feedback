@@ -1,12 +1,25 @@
 angular.module('app.controllers', []).controller('LoginController', function($scope, $state, popupService, $window, LoginDto) {
   $scope.loginDto = new LoginDto();
   
+  $scope.isCookieUndefined = function() {
+	  var username = getCookie("username");
+	    if (username === "") {
+	        return true;
+	    } else {
+	        return false;
+	    }
+  };
+  
   $scope.login = function(loginDto) { 
 	  var name = $scope.loginDto.userName
 	  $scope.loginDto.$save(function() {
-	      $state.go('pendingFeedback', { username: name }); 
+		  document.cookie = "username=" + name + "; path=/";
+	      $state.go('pendingFeedback'); 
 	    });
 	  };
+  $scope.logout = function(){ 
+	  logout();
+  };
 }).controller('CategoriesListController', function($scope, $stateParams, Category) {
 	$scope.categories = Category.query(); 
 }).controller('FeedbackController', function($scope, $state, $stateParams, Category, FeedbackDto) {
@@ -19,15 +32,15 @@ angular.module('app.controllers', []).controller('LoginController', function($sc
 	$scope.submitFeedback = function() { 
 			console.log($scope.feedbackDto.fromUsername);
 			$scope.feedbackDto.$save(function() {
-			      $state.go('pendingFeedback', { username: $stateParams.fromUsername }); 
+			      $state.go('pendingFeedback'); 
 			    });
 		  };
 }).controller('PendingFeedbackController', ['$scope', '$http', '$stateParams', 
 	function($scope, $http, $stateParams, Employee) {
-	$http.get("/employee/pendingReviews", {params:{"username": $stateParams.username}})
+	$http.get("/employee/pendingReviews", {params:{"username": getCookie("username")}})
     						.then(function (response) { 
     							$scope.employees = response.data;
-    							$scope.currentUsername = $stateParams.username;
+    							$scope.currentUsername = getCookie("username");
     						})
 }]).controller('FeedbackReceivedController', ['$scope', '$http', '$stateParams', 
 	function($scope, $http, $stateParams) {
