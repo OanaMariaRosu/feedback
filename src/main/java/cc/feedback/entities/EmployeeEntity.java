@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name = "EMPLOYEE", schema = "sql11172759")
+@Table(name = "EMPLOYEE")
 @XmlRootElement(name = "employee")
 public class EmployeeEntity {
 

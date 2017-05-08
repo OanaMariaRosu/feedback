@@ -76,6 +76,16 @@
 	        templateUrl: viewsPrefix + 'view-feedback.html',
 	        controller:'ViewFeedbackController'
 			})
+			.state('feedbackChart',{
+	        url:'/feedbackChart/:username&:id',
+	        templateUrl: viewsPrefix + 'feedback-chart.html',
+	        controller:'FeedbackChartController'
+			})
+			.state('teamFeedbackChart',{
+	        url:'/teamFeedbackChart/:username&:id',
+	        templateUrl: viewsPrefix + 'team-chart.html',
+	        controller:'TeamFeedbackChartController'
+			})
 	})
 	.directive('updateTitle', ['$rootScope', '$timeout',
 		function($rootScope, $timeout) {

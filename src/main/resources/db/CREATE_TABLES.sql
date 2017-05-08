@@ -1,0 +1,65 @@
+CREATE TABLE category (
+    ID int NOT NULL,
+    NAME varchar(20),
+    DESCRIPTION varchar(50),
+    PRIMARY KEY (ID)
+);
+
+CREATE TABLE team (
+    ID int NOT NULL,
+    PROJECT_NAME varchar(20),
+    PRIMARY KEY (ID)
+);
+
+CREATE TABLE employee (
+    ID int NOT NULL,
+    TEAM_ID int NOT NULL,
+    NAME varchar(20),
+    SURNAME varchar(20),
+    USER_NAME varchar(10),
+    PASSWORD varchar(10),
+    POSITION varchar(20),
+    DATE_OF_EMPLOYMENT date,
+    NEXT_REVIEW_DATE date,
+    IS_TEAM_LEADER boolean,
+    PRIMARY KEY (ID),
+    CONSTRAINT FK_TEAM_ID FOREIGN KEY (TEAM_ID)
+    REFERENCES team(ID)
+);
+
+CREATE TABLE feedback (
+    ID int NOT NULL,
+    GIVEN_BY int NOT NULL,
+    GIVEN_TO int NOT NULL,
+    GIVEN_AT date,
+    PRIMARY KEY (ID),
+    CONSTRAINT FK_GIVEN_TO FOREIGN KEY (GIVEN_BY)
+    REFERENCES employee(ID)
+);
+ALTER TABLE feedback
+ADD FOREIGN KEY (GIVEN_TO) REFERENCES employee(ID);
+
+CREATE TABLE rating (
+    ID int NOT NULL,
+    CATEGORY_ID int NOT NULL,
+    FEEDBACK_ID int NOT NULL,
+    MESSAGE varchar(20),
+    SCORE int,
+    PRIMARY KEY (ID),
+    CONSTRAINT FK_CATEGORY_ID FOREIGN KEY (CATEGORY_ID)
+    REFERENCES category(ID)
+);
+ALTER TABLE rating
+ADD FOREIGN KEY (FEEDBACK_ID) REFERENCES feedback(ID);
+
+CREATE TABLE pending_feedback (
+    ID int NOT NULL,
+    FEEDBACK_FOR int NOT NULL,
+    FEEDBACK_FROM int NOT NULL,
+    DUE_DATE date,
+    PRIMARY KEY (ID),
+    CONSTRAINT FK_FEEDBACK_FOR FOREIGN KEY (FEEDBACK_FOR)
+    REFERENCES employee(ID)
+);
+ALTER TABLE pending_feedback
+ADD FOREIGN KEY (FEEDBACK_FROM) REFERENCES employee(ID);
