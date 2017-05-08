@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cc.feedback.dao.CategoryDao;
 import cc.feedback.dao.FeedbackDao;
 import cc.feedback.dao.PendingFeedbackDao;
+import cc.feedback.dto.FeedbackDto;
 import cc.feedback.entities.CategoryEntity;
 import cc.feedback.entities.FeedbackEntity;
 
@@ -31,10 +32,14 @@ public class FeedbackController {
 	private CategoryDao categoryDao;
 
 	@RequestMapping(value = "/feedback", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void processFeedback(@RequestBody FeedbackEntity feedback) {
-		feedbackDao.save(feedback);
-		pendingFeedbackDao.resolveFeedback(feedback.getGivenBy(), feedback.getGivenTo());
-
+	public void processFeedback(@RequestBody FeedbackDto feedbackDto) {
+		System.out.println(feedbackDto.getFromUsername());
+		System.out.println(feedbackDto.getToUsername());
+		System.out.println(feedbackDto.getScores());
+		System.out.println(feedbackDto.getComments());
+		// TODO: build FeedbackEntity
+		// feedbackDao.save(feedback);
+		//pendingFeedbackDao.resolveFeedback(feedback.getGivenBy(), feedback.getGivenTo());
 	}
 	
 	@RequestMapping(value="/category", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -47,4 +52,5 @@ public class FeedbackController {
 		// get a feedback to see the returned json
 		return feedbackDao.getFeedback(id);
 	}
+	
 }

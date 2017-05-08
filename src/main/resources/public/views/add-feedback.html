@@ -1,0 +1,34 @@
+<div class="container pad-top">
+	<form>
+	<div>
+		<a ui-sref="viewCategory" class="btn-primary btn-lg nodecoration">View
+			Categories</a>
+		<a ui-sref="pendingFeedback({username:currentUsername})" class="btn-primary btn-lg nodecoration">Return
+			to pending feedback</a>
+	</div>
+	<br> <br>
+	<table class="table categorytable">
+		<thead>
+			<tr>
+				<th>Category name</th>
+				<th>Category rating</th>
+				<th>Argument for the rating</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="category in categories">
+				<td><b>{{category.name}}</b></td>
+				<td><input type="number" id="rating" min="1" max="5" value="1"
+					ng-model="feedbackDto.scores[$index]" class="form-control" 
+					ng-required="feedbackDto.comments[$index]" /></td>
+				<td><input type="text" id="argument"
+					ng-model="feedbackDto.comments[$index]" class="form-control"
+					ng-required="feedbackDto.scores[$index]" /></td>
+			</tr>
+		</tbody>
+	</table>
+
+<!-- TODO: verified submit -->
+	<a class="btn btn-danger" ng-click="submitFeedback()">Submit</a>
+	</form>
+</div>

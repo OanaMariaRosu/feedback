@@ -1,0 +1,31 @@
+<div class="container pad-top">
+	<div>
+		<a ui-sref="viewFeedbacksReceived({username:currentUsername})"
+			class="btn-primary btn-lg nodecoration">View the feedbacks received</a>
+		<a ui-sref="viewFeedbacksGiven({username:currentUsername})" 
+			class="btn-primary btn-lg nodecoration">View the feedbacks given</a>
+	</div>
+	
+	<br><br>
+	
+	<h2>Pending feedbacks</h2>
+	<table class="table categorytable">
+		<thead>
+			<tr>
+				<th>Employee name</th>
+				<th>Employee surname</th>
+				<th>Next review date</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="employee in employees">
+				<td>{{employee.name}}</td>
+				<td>{{employee.surname}}</td>
+				<td>{{employee.nextReviewDate}}</td>
+				<td><a class="btn btn-primary"
+					ui-sref="postFeedback({fromUsername:currentUsername, toUsername:employee.userName})">Add
+						feedback</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

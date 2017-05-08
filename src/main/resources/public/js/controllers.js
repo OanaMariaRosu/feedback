@@ -1,34 +1,55 @@
-angular.module('app.controllers', []).controller('ShipwreckListController', function($scope, $state, popupService, $window, Shipwreck) {
-  $scope.shipwrecks = Shipwreck.query(); //fetch all shipwrecks. Issues a GET to /api/vi/shipwrecks
-
-  $scope.deleteShipwreck = function(shipwreck) { // Delete a Shipwreck. Issues a DELETE to /api/v1/shipwrecks/:id
-    if (popupService.showPopup('Really delete this?')) {
-      shipwreck.$delete(function() {
-        $scope.shipwrecks = Shipwreck.query(); 
-        $state.go('shipwrecks');
-      });
-    }
-  };
-}).controller('ShipwreckViewController', function($scope, $stateParams, Shipwreck) {
-  $scope.shipwreck = Shipwreck.get({ id: $stateParams.id }); //Get a single shipwreck.Issues a GET to /api/v1/shipwrecks/:id
-}).controller('ShipwreckCreateController', function($scope, $state, $stateParams, Shipwreck) {
-  $scope.shipwreck = new Shipwreck();  //create new shipwreck instance. Properties will be set via ng-model on UI
-
-  $scope.addShipwreck = function() { //create a new shipwreck. Issues a POST to /api/v1/shipwrecks
-    $scope.shipwreck.$save(function() {
-      $state.go('shipwrecks'); // on success go back to the list i.e. shipwrecks state.
-    });
-  };
-}).controller('ShipwreckEditController', function($scope, $state, $stateParams, Shipwreck) {
-  $scope.updateShipwreck = function() { //Update the edited shipwreck. Issues a PUT to /api/v1/shipwrecks/:id
-    $scope.shipwreck.$update(function() {
-      $state.go('shipwrecks'); // on success go back to the list i.e. shipwrecks state.
-    });
-  };
-
-  $scope.loadShipwreck = function() { //Issues a GET request to /api/v1/shipwrecks/:id to get a shipwreck to update
-    $scope.shipwreck = Shipwreck.get({ id: $stateParams.id });
-  };
-
-  $scope.loadShipwreck(); // Load a shipwreck which can be edited on UI
-});
+angular.module('app.controllers', []).controller('LoginController', function($scope, $state, popupService, $window, LoginDto) {
+  $scope.loginDto = new LoginDto();
+  
+  $scope.login = function(loginDto) { 
+	  var name = $scope.loginDto.userName
+	  $scope.loginDto.$save(function() {
+	      $state.go('pendingFeedback', { username: name }); 
+	    });
+	  };
+}).controller('CategoriesListController', function($scope, $stateParams, Category) {
+	$scope.categories = Category.query(); 
+}).controller('FeedbackController', function($scope, $state, $stateParams, Category, FeedbackDto) {
+	$scope.feedbackDto = new FeedbackDto();
+	$scope.feedbackDto.fromUsername = $stateParams.fromUsername;
+	$scope.feedbackDto.toUsername = $stateParams.toUsername;
+	$scope.categories = Category.query(); 
+	$scope.feedbackDto.scores = [];
+	$scope.feedbackDto.comments = [];
+	$scope.submitFeedback = function() { 
+			console.log($scope.feedbackDto.fromUsername);
+			//ar trebui sa fie completate toate casutele inainte de a da submit?
+			//proceseaza arrayurile
+			$scope.feedbackDto.$save(function() {
+			      $state.go('pendingFeedback', { username: $stateParams.fromUsername }); 
+			    });
+		  };
+}).controller('PendingFeedbackController', ['$scope', '$http', '$stateParams', 
+	function($scope, $http, $stateParams, Employee) {
+	$http.get("/employee/pendingReviews", {params:{"username": $stateParams.username}})
+    						.then(function (response) { 
+    							$scope.employees = response.data;
+    							$scope.currentUsername = $stateParams.username;
+    						})
+}]).controller('FeedbackReceivedController', ['$scope', '$http', '$stateParams', 
+	function($scope, $http, $stateParams) {
+	$http.get("/employee/receivedReviews", {params:{"username": $stateParams.username}})
+    						.then(function (response) { 
+    							$scope.feedbacks = response.data;
+    							$scope.currentUsername = $stateParams.username;
+    						})
+}]).controller('FeedbackGivenController', ['$scope', '$http', '$stateParams', 
+	function($scope, $http, $stateParams) {
+	$http.get("/employee/givenReviews", {params:{"username": $stateParams.username}})
+    						.then(function (response) { 
+    							$scope.feedbacks = response.data;
+    							$scope.currentUsername = $stateParams.username;
+    						})
+}]).controller('ViewFeedbackController', ['$scope', '$http', '$stateParams', 
+	function($scope, $http, $stateParams) {
+	$http.get("/feedback", {params:{"id": $stateParams.id}})
+    						.then(function (response) { 
+    							$scope.feedback = response.data;
+    							$scope.currentUsername = $stateParams.username;
+    						})
+}]);

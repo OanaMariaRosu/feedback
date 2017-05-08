@@ -3,32 +3,35 @@ package cc.feedback.dto;
 import java.util.Date;
 import java.util.List;
 
-import cc.feedback.entities.RatingEntity;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "feedback")
 public class FeedbackDto {
 
-	private Long fromId;
+	private String fromUsername;
 
-	private Long toId;
+	private String toUsername;
 
 	private Date givenAt;
 
-	private List<RatingEntity> ratings;
+	private List<String> scores;
+	
+	private List<String> comments;
 
-	public Long getFromId() {
-		return fromId;
+	public String getFromUsername() {
+		return fromUsername;
 	}
 
-	public void setFromId(Long fromId) {
-		this.fromId = fromId;
+	public void setFromUsername(String fromUsername) {
+		this.fromUsername = fromUsername;
 	}
 
-	public Long getToId() {
-		return toId;
+	public String getToUsername() {
+		return toUsername;
 	}
 
-	public void setToId(Long toId) {
-		this.toId = toId;
+	public void setToUsername(String toUsername) {
+		this.toUsername = toUsername;
 	}
 
 	public Date getGivenAt() {
@@ -39,12 +42,22 @@ public class FeedbackDto {
 		this.givenAt = givenAt;
 	}
 
-	public List<RatingEntity> getRatings() {
-		return ratings;
+	public List<String> getScores() {
+		return scores;
 	}
 
-	public void setRatings(List<RatingEntity> ratings) {
-		this.ratings = ratings;
+	public void setScores(List<String> scores) {
+		this.scores = scores;
 	}
+
+	public List<String> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<String> comments) {
+		this.comments = comments;
+	}
+
+	
 
 }

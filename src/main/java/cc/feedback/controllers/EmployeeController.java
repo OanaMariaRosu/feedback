@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cc.feedback.dao.EmployeeDao;
+import cc.feedback.dao.FeedbackDao;
 import cc.feedback.dao.TeamDao;
 import cc.feedback.entities.EmployeeEntity;
+import cc.feedback.entities.FeedbackEntity;
 import cc.feedback.entities.TeamEntity;
 
 @RestController
@@ -22,6 +24,9 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeDao employeeDao;
+	
+	@Autowired
+	private FeedbackDao feedbackDao;
 
 	@Autowired
 	private TeamDao teamDao;
@@ -38,10 +43,18 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/employee/pendingReviews", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<EmployeeEntity> getAllPendingReviewsToDo(@RequestParam(value="id") Long id) {
-		// return all the employees for which he has to do review
-		return employeeDao.getAllPendingReviews(id);
+	public List<EmployeeEntity> getAllPendingReviews(@RequestParam(value="username") String username) {
+		return employeeDao.getAllPendingReviews(username);
 	}
-
-
+	
+	@RequestMapping(value="/employee/receivedReviews", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<FeedbackEntity> getAllFeedbacksGivenToTheEmployee(@RequestParam(value="username") String username) {
+		return feedbackDao.getFeedbacksGivenToEmployee(username);
+	}
+	
+	@RequestMapping(value="/employee/givenReviews", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<FeedbackEntity> getAllFeedbacksGivenByTheEmployee(@RequestParam(value="username") String username) {
+		return feedbackDao.getFeedbacksGivenByEmployee(username);
+	}
+	
 }

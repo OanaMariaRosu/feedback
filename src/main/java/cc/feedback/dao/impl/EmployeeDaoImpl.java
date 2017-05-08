@@ -43,8 +43,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public List<EmployeeEntity> getAllPendingReviews(Long id) {
-		EmployeeEntity employee = getEmployeeById(id);
+	public List<EmployeeEntity> getAllPendingReviews(String username) {
+		EmployeeEntity employee = getEmployeeByUsername(username);
 		List<PendingFeedbackEntity> pendingReviews = employee.getPendingFeedbacks();
 		
 		List<EmployeeEntity> employees = new ArrayList<>();

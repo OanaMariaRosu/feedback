@@ -13,7 +13,7 @@ public interface EmployeeDao {
 
 	EmployeeEntity getEmployeeById(Long id);
 
-	List<EmployeeEntity> getAllPendingReviews(Long id);
+	List<EmployeeEntity> getAllPendingReviews(String username);
 
 	List<EmployeeEntity> getEmployeesThatHaveReviewsSoon();
 

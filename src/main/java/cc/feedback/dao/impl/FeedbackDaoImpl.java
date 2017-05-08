@@ -1,7 +1,10 @@
 package cc.feedback.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +28,26 @@ public class FeedbackDaoImpl implements FeedbackDao {
 	@Override
 	public FeedbackEntity getFeedback(Long id) {
 		return entityManager.find(FeedbackEntity.class, id);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<FeedbackEntity> getFeedbacksGivenToEmployee(String username) {
+		Query query = entityManager.createQuery("Select F FROM FeedbackEntity F WHERE F.givenTo.userName =:userName");
+		query.setParameter("userName", username);
+		List<FeedbackEntity> results = query.getResultList();
+		
+		return results;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<FeedbackEntity> getFeedbacksGivenByEmployee(String username) {
+		Query query = entityManager.createQuery("Select F FROM FeedbackEntity F WHERE F.givenBy.userName =:userName");
+		query.setParameter("userName", username);
+		List<FeedbackEntity> results = query.getResultList();
+		
+		return results;
 	}
 
 }

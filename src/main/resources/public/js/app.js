@@ -43,25 +43,39 @@
 				templateUrl: viewsPrefix + "home.html",
 				data: {
 					pageTitle: 'Home'
-				}
+				},
+				controller:'LoginController'
 			})
-			.state('shipwrecks',{
-	        url:'/shipwrecks',
-	        templateUrl: viewsPrefix + 'shipwrecks.html',
-	        controller:'ShipwreckListController'
-	    }).state('viewShipwreck',{
-	       url:'/shipwrecks/:id/view',
-	       templateUrl: viewsPrefix + 'shipwreck-view.html',
-	       controller:'ShipwreckViewController'
-	    }).state('newShipwreck',{
-	        url:'/shipwrecks/new',
-	        templateUrl: viewsPrefix + 'shipwreck-add.html',
-	        controller:'ShipwreckCreateController'
-	    }).state('editShipwreck',{
-	        url:'/shipwrecks/:id/edit',
-	        templateUrl: viewsPrefix + 'shipwreck-edit.html',
-	        controller:'ShipwreckEditController'
-	    })
+			.state('viewCategory',{
+	        url:'/category',
+	        templateUrl: viewsPrefix + 'category.html',
+	        controller:'CategoriesListController'
+			})
+			.state('pendingFeedback',{
+	        url:'/pendingFeedback/:username',
+	        templateUrl: viewsPrefix + 'feedback.html',
+	        controller:'PendingFeedbackController'
+			})
+			.state('postFeedback',{
+	        url:'/postFeedback/:fromUsername&:toUsername',
+	        templateUrl: viewsPrefix + 'add-feedback.html',
+	        controller:'FeedbackController'
+			})
+			.state('viewFeedbacksGiven',{
+	        url:'/viewFeedbacksGiven/:username',
+	        templateUrl: viewsPrefix + 'view-feedbacks-given.html',
+	        controller:'FeedbackGivenController'
+			})
+			.state('viewFeedbacksReceived',{
+	        url:'/viewFeedbacksReceived/:username',
+	        templateUrl: viewsPrefix + 'view-feedbacks-received.html',
+	        controller:'FeedbackReceivedController'
+			})
+			.state('viewFeedback',{
+	        url:'/viewFeedback/:username&:id',
+	        templateUrl: viewsPrefix + 'view-feedback.html',
+	        controller:'ViewFeedbackController'
+			})
 	})
 	.directive('updateTitle', ['$rootScope', '$timeout',
 		function($rootScope, $timeout) {

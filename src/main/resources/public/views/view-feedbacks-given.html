@@ -1,0 +1,26 @@
+<div class="container pad-top">
+	<div>
+		<a ui-sref="pendingFeedback({username:currentUsername})" class="btn-primary btn-lg nodecoration">Return
+			to pending feedback</a>
+	</div>
+	<div>
+		<table class="table categorytable">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Surname</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="feedback in feedbacks">
+					<td>{{feedback.givenTo.name}}</td>
+					<td>{{feedback.givenTo.surname}}</td>
+					<td>{{feedback.givenAt}}</td>
+					<td><a class="btn btn-primary"
+						ui-sref="viewFeedback({id:feedback.id, username:currentUsername})">View</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
